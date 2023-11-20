@@ -1,0 +1,145 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  place-items: center;
+  width: max-content;
+  border: 1px solid black;
+  .grid-item {
+    background-color: #eee;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 1.5rem;
+    // border: 1px solid #ccc;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .drawing-item {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0;
+      transition: 0.3s ease all;
+      pointer-events: none;
+      &.circle {
+        border-radius: 50%;
+      }
+      &.square {
+        border-radius: 0;
+      }
+      &.half-circle {
+        border-radius: 100% 100% 0 0;
+      }
+      &.quarter-circle {
+        border-radius: 100% 0 0 0;
+      }
+    }
+    .controls {
+      display: flex;
+      // align-items: flex-end;
+      flex-wrap: wrap;
+
+      gap: 5px;
+      padding: 2.5px;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease all;
+      .control {
+        z-index: 3;
+        // max-height: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: #eeeeee7a;
+        border-radius: 50%;
+        transition: 0.3s ease all;
+        // border: 1px solid red;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 80%;
+          height: 80%;
+          // border: 1px solid red;
+          user-select: none;
+          pointer-events: none;
+          color: white;
+
+          // border: 1px solid black;
+          // object-fit: contain;
+        }
+        &:hover {
+          background-color: #fff;
+        }
+      }
+    }
+    .white-circ {
+      width: 73%;
+      height: 73%;
+      border-radius: 50%;
+      background-color: white;
+      position: absolute;
+      inset: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .plus-icon {
+      position: absolute;
+      width: 75%;
+      height: 75%;
+      opacity: 0;
+      transition: 0.3s ease opacity;
+      user-select: none;
+      z-index: 1;
+      // pointer-events: none;
+      // border: red 1px solid;
+    }
+    &:hover {
+      // background-color: #333;
+      .plus-icon {
+        opacity: 1;
+      }
+    }
+    &.active {
+      // pointer-events: none;
+      .white-circ {
+        display: none;
+      }
+      .drawing-item {
+        opacity: 1;
+      }
+      .plus-icon {
+        opacity: 0;
+      }
+      &:hover {
+        .controls {
+          opacity: 1;
+          pointer-events: all;
+        }
+      }
+    }
+  }
+}
